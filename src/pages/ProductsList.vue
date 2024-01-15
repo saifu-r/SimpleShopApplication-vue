@@ -1,24 +1,41 @@
 <template>
-    <h1>This is Product List Page</h1>
-    <h4>{{ emptyVal }}</h4>
-    
+  <section>
+    <ul>
+      <product-item
+        v-for="product in products"
+        :key="product.id"
+        :id="product.id"
+        :title="product.title"
+        :image="product.image"
+        :description="product.description"
+        :price="product.price"
+      ></product-item>
+    </ul>
+  </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import ProductItem from "../components/products/ProductItem.vue";
 
 export default defineComponent({
+  components: { ProductItem },
   setup() {
-    const emptyVal= ref("hello")
+    const store = useStore();
+    const products = computed(() => store.state.products);
 
-    return {emptyVal}
-
-
+    return { products };
   },
 });
 </script>
 
 <style scoped>
-
+ul {
+  list-style: none;
+  margin: 2rem auto;
+  padding: 0;
+  max-width: 40rem;
+}
 </style>
 

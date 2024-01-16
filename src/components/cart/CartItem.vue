@@ -16,24 +16,33 @@
         </div>
       </div>
       <div class="item__total">Total: ${{ itemTotal }}</div>
-      <button @click="remove">Remove</button>
+      <button @click="removeItem">Remove</button>
     </div>
   </li>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   props: ["prodId", "title", "image", "price", "qty"],
   setup(props) {
+    const store= useStore()
     const itemTotal= computed(()=>{
         return (props.price * props.qty).toFixed(2)
     })
 
+    const removeItem= ()=>{
+        store.dispatch('removeToCartAction',{
+          productId: props.prodId,
+          
+        })
+    }
 
 
-    return {itemTotal}
+
+    return {itemTotal, removeItem}
   },
 });
 </script>

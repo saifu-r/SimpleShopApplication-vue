@@ -36,8 +36,6 @@ export default createStore({
     qty:0 
   },
 
-
-
   getters: {
     products(state){
       return state.products
@@ -54,10 +52,6 @@ export default createStore({
     },
   },
 
-
-
-
-  
   mutations: {
     addProductToCart(state, payload){
       const productData= payload
@@ -78,11 +72,12 @@ export default createStore({
         state.items.push(newItem)
       }
       state.qty++
-      state.total+= productData.prices
+      state.total+= productData.price
+
     },
 
     removeProductFromCart(state, payload) {
-      const prodId= payload.product
+      const prodId= payload.productId
       const productInCartIndex = state.items.findIndex(
         (cartItem) => cartItem.productId === prodId
       );

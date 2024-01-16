@@ -26,7 +26,7 @@ export default defineComponent({
   setup() {
     const store= useStore()
     const cartTotal= computed(()=>{
-      return store.getters.totalSum
+      return (store.getters.totalSum).toFixed(2)
     })
 
     const cartItems= computed(()=>{

@@ -46,8 +46,10 @@ export default defineComponent({
 <style scoped>
 header {
   height: 5rem;
-  background-color: white;
-  margin: 0 10%;
+  width: 100%;
+  background-color: rgb(107, 143, 189);
+  /* margin: 0 10%; */
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +57,6 @@ header {
 
 ul {
   list-style: none;
-  margin: 0;
   padding: 0;
   display: flex;
   justify-self: center;
@@ -63,7 +64,7 @@ ul {
 }
 
 li {
-  margin: 0 1rem;
+  margin: 2rem 1rem;
 }
 
 a {

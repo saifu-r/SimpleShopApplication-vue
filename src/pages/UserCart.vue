@@ -1,24 +1,64 @@
 <template>
-    <h1>This is Cart Page</h1>
-    <h4>{{ emptyVal }}</h4>
-    
+  <section>
+    <h2>Your Cart</h2>
+    <h3>Total Amount: <base-badge mode="elegant">${{ cartTotal }}</base-badge></h3>
+    <ul>
+      <cart-item
+        v-for="item in cartItems"
+        :key="item.productId"
+        :prod-id="item.productId"
+        :title="item.title"
+        :image="item.image"
+        :price="item.price"
+        :qty="item.qty"
+      ></cart-item>
+    </ul>
+  </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
+import CartItem from '../components/cart/CartItem.vue'
 
 export default defineComponent({
+  components: {CartItem},
   setup() {
-    const emptyVal= ref("hello")
+    const store= useStore()
+    const cartTotal= computed(()=>{
+      return store.getters.totalSum
+    })
 
-    return {emptyVal}
+    const cartItems= computed(()=>{
+      return store.getters.items
+    })
 
-
+    return {cartTotal, cartItems}
   },
 });
 </script>
 
 <style scoped>
+section {
+  margin: 2rem auto;
+  max-width: 40rem;
+}
 
+h2 {
+  color: #292929;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 1rem;
+}
+
+h3 {
+ text-align: center;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 </style>
 

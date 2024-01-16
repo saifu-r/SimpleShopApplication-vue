@@ -5,26 +5,40 @@
         <img :src="image" :alt="title" />
       </div>
       <div class="product__text">
-        <h3>{{title}}</h3>
+        <h3>{{ title }}</h3>
         <base-badge mode="highlight" :no-margin-left="true">
           <h4>${{ price }}</h4>
         </base-badge>
-        <p>{{description}}</p>
+        <p>{{ description }}</p>
       </div>
     </div>
     <div class="product__actions">
-      <button>Add to Cart</button> <!-- a function will be here -->
-      
+      <button @click="addToCart">Add to Cart</button>
+      <!-- a function will be here -->
     </div>
   </li>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   props: ["id", "image", "title", "price", "description"],
 
+  setup(props) {
+    const store= useStore()
+    const addToCart = () => {
+        store.dispatch('addToCart', {
+          id: props.id,
+          image: props.image,
+          title: props.title,
+          price: props.price,
+        })
+        
+    };
+    return {addToCart}
+  },
 });
 </script>
 

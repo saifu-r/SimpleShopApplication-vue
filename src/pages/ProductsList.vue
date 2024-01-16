@@ -23,7 +23,7 @@ export default defineComponent({
   components: { ProductItem },
   setup() {
     const store = useStore();
-    const products = computed(() => store.state.products);
+    const products = computed(() => store.getters.products);
 
     return { products };
   },

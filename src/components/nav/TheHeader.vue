@@ -11,7 +11,7 @@
                 </li>
                 <li>
                     <router-link to="/cart">Cart</router-link>
-                    <base-badge mode="elegent">---</base-badge>
+                    <base-badge mode="elegent">{{ quantity }}</base-badge>
                 </li>
                 <li>
                     <router-link to="/admin">Admin</router-link>
@@ -27,10 +27,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, registerRuntimeCompiler } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
-  components: {},
+  setup(){
+    const store= useStore()
+
+    const quantity = computed(() => store.getters.quantity);
+
+    return {quantity}
+  }
+
   
 });
 </script>

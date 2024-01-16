@@ -13,14 +13,14 @@
                     <router-link to="/cart">Cart</router-link>
                     <base-badge mode="elegent">{{ quantity }}</base-badge>
                 </li>
-                <li>
+                <li v-if="isLoggedIn">
                     <router-link to="/admin">Admin</router-link>
                 </li>
             </ul>
         </nav>
         <div>
-            <button>Login</button>
-            <button>Logout</button>
+            <button @click="isAuth" v-if="!isLoggedIn">Login</button>
+            <button @click="isAuth" v-else>Logout</button>
         </div>
     </header>
     
@@ -36,7 +36,13 @@ export default defineComponent({
 
     const quantity = computed(() => store.getters.quantity);
 
-    return {quantity}
+    const isLoggedIn= computed(()=> store.getters.isLoggedIn)
+
+    const isAuth= ()=>{
+      store.dispatch('isAuth', isLoggedIn)
+    }
+
+    return {quantity, isLoggedIn, isAuth}
   }
 
   

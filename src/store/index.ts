@@ -50,6 +50,10 @@ export default createStore({
     quantity(state){
       return state.qty
     },
+    isLoggedIn(state){
+      return state.isLoggedIn
+    }
+
   },
 
   mutations: {
@@ -87,6 +91,14 @@ export default createStore({
       state.total -= prodData.price * prodData.qty;
     },
 
+    isAuth(state, payload){
+      if(state.isLoggedIn=== false){
+        state.isLoggedIn= true
+      }else{
+        state.isLoggedIn= false
+      }
+    }
+
   },
   actions: {
 
@@ -95,8 +107,12 @@ export default createStore({
     },
     removeToCartAction(context, payload){
       context.commit('removeProductFromCart', payload )
+    },
+    isAuth(context, payload){
+      context.commit('isAuth', payload)
     }
   },
+
   modules: {
   }
 })
